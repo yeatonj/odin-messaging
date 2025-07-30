@@ -7,7 +7,7 @@ const app = express();
 require('dotenv').config();
 
 // Routes
-const indexrouter = require("./routes/indexRouter");
+const indexRouter = require("./routes/indexRouter");
 
 // Set up ejs
 const path = require("node:path");
@@ -31,7 +31,8 @@ require('./authentication/passport');
 app.use(passport.session());
 
 // Set routes
-app.get("/", indexrouter);
+app.use("/login", loginRouter);
+app.use("/", indexRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
