@@ -16,7 +16,7 @@ async function verifyCallback(username, password, done) {
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
       }
-      const isValid = validPassword(password, user.password);
+      const isValid = await validPassword(password, user.password);
       if (!isValid) {
         return done(null, false, { message: "Incorrect password" });
       }
