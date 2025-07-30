@@ -10,7 +10,7 @@ async function signupGet(req, res) {
 async function signupPost(req, res) {    
     try {
         await addUser(req.body.mail, req.body.pass, req.body.fName, req.body.lName);
-        res.redirect("/");
+        res.redirect("/login");
     } catch {
         res.render("signup", {
             title: "Signup Page",
