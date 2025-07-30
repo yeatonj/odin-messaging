@@ -27,3 +27,18 @@ async function verifyCallback(username, password, done) {
 const strategy = new LocalStrategy(customFields, verifyCallback);
 
 passport.use(strategy);
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const rows = getUserFromUsername(username);
+    const user = rows[0];
+
+    done(null, user);
+  } catch(err) {
+    done(err);
+  }
+});
