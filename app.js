@@ -8,6 +8,9 @@ require('dotenv').config();
 
 // Routes
 const indexRouter = require("./routes/indexRouter");
+const loginRouter = require("./routes/loginRouter");
+const signupRouter = require("./routes/signupRouter");
+
 
 // Set up ejs
 const path = require("node:path");
@@ -16,11 +19,10 @@ app.set("view engine", "ejs");
 
 // This line allows express to parse the form data
 app.use(express.urlencoded({ extended: true }));
-
 // Set session data
 const session = require("express-session");
 const passport = require("passport");
-const loginRouter = require("./routes/loginRouter");
+
 app.use(session({
     secret: process.env.SECRET,
     resave: false,
@@ -41,6 +43,7 @@ app.get("/logout", (req, res, next) => {
     res.redirect("/");
   });
 });
+app.use("/signup", signupRouter);
 app.use("/", indexRouter);
 
 
