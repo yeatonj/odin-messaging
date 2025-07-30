@@ -6,12 +6,12 @@
 </head>
 <body>
   <h1><%= title %></h1>
-  <form action="/login">
+  <form action="/login" method="post">
     <label for="uname">Username:</label>
     <input type="email" name="uname" id="uname">
 
     <label for="pw">Password:</label>
-    <input type="text" name="pw" id="pw">
+    <input type="password" name="pw" id="pw">
 
     <button type="submit">Login</button>
   </form>

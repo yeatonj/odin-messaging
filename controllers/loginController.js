@@ -1,13 +1,15 @@
-async function loginGet(req, res, next) {
+const passport = require('passport');
+
+async function loginGet(req, res) {
     res.render("login", {
         title: "Login Page"
     });
 }
 
-async function loginPost(req, res, next) {
-    await addAuthor(req.body.newAuthor);
-    res.redirect("/");
-}
+const loginPost = passport.authenticate("local", {
+        successRedirect: "/",
+        failureRedirect: "/login"
+      });
 
 module.exports = {
     loginGet,

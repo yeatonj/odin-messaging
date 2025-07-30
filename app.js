@@ -28,12 +28,13 @@ app.use(session({
 }));
 
 // Authenticate passport
-require('./authentication/passport');
 app.use(passport.session());
+require('./authentication/passport');
 
 // Set routes
 app.use("/login", loginRouter);
 app.use("/", indexRouter);
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

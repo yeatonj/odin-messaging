@@ -1,6 +1,6 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const { getUserFromUsername } = require('../db/queries');
+const { getUserFromUsername, getUserFromId } = require('../db/queries');
 const { validPassword } = require('../lib/passwordUtils');
 
 const customFields = {
@@ -10,7 +10,7 @@ const customFields = {
 
 async function verifyCallback(username, password, done) {
     try {
-      const rows = getUserFromUsername(username);
+      const rows = await getUserFromUsername(username);
       const user = rows[0];
 
       if (!user) {
@@ -36,7 +36,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const rows = getUserFromUsername(username);
+    const rows = await getUserFromId(id);
     const user = rows[0];
 
     done(null, user);
