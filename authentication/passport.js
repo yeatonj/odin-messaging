@@ -1,6 +1,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const getUserFromUsername = require('../db/queries');
+const { validPassword } = require('../lib/passwordUtils');
 
 const customFields = {
     usernameField: 'uname',
@@ -15,7 +16,8 @@ async function verifyCallback(username, password, done) {
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
       }
-      if (user.password !== password) {
+      const isValid = validPassword(password, user.password);
+      if (!isValid) {
         return done(null, false, { message: "Incorrect password" });
       }
       return done(null, user);
