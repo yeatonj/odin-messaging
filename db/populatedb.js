@@ -15,6 +15,13 @@ CREATE TABLE IF NOT EXISTS users (
     isAdmin     BOOLEAN
 );
 
+CREATE TABLE IF NOT EXISTS messages (
+  id            INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  message       VARCHAR (511),
+  user_id       INTEGER references users(id),
+  date          TIMESTAMP
+);
+
 INSERT INTO users (username, password, first, last, isMember, isAdmin) 
 VALUES
   ('fake_admin@admin.com', 'fake_ad', 'John', 'Admin', true, true),
