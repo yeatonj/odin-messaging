@@ -11,11 +11,24 @@ const indexrouter = require("./routes/indexRouter");
 
 // Set up ejs
 const path = require("node:path");
+const { session } = require("passport");
+const passport = require("passport");
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 // This line allows express to parse the form data
 app.use(express.urlencoded({ extended: true }));
+
+// Set session data
+app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized:false
+}));
+
+// Authenticate passport
+require('./authentication/passport');
+app.use(passport.session());
 
 // Set routes
 app.get("/", indexrouter);
