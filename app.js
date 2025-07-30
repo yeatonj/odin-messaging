@@ -33,6 +33,14 @@ require('./authentication/passport');
 
 // Set routes
 app.use("/login", loginRouter);
+app.get("/logout", (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
 app.use("/", indexRouter);
 
 
