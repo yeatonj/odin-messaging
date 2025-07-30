@@ -11,8 +11,6 @@ const indexRouter = require("./routes/indexRouter");
 
 // Set up ejs
 const path = require("node:path");
-const { session } = require("passport");
-const passport = require("passport");
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
@@ -20,6 +18,9 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
 // Set session data
+const session = require("express-session");
+const passport = require("passport");
+const loginRouter = require("./routes/loginRouter");
 app.use(session({
     secret: process.env.SECRET,
     resave: false,
