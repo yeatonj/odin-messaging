@@ -1,5 +1,6 @@
 const pool = require("./pool");
 const { genPassword } = require("../lib/passwordUtils");
+const { use } = require("passport");
 
 async function getUserFromUsername(username) {
   const { rows } = await pool.query("SELECT * FROM users WHERE username=$1",[username]);
@@ -21,8 +22,32 @@ async function addUser(username, password, first, last, memberPhrase, adminPhras
   }
 }
 
+async function getMessages() {
+  const { rows } = await pool.query("SELECT * FROM messages;");
+  return rows;
+}
+
+async function deleteMessage(id) {
+  try {
+    await pool.query("DELETE FROM messages WHERE user_id=$1;", [id]);
+  } catch {
+    throw error("Unable to delete message");
+  }
+}
+
+async function postMessage(message, user_id, date) {
+  try {
+    await pool.query("INSERT INTO messages (message, user_id, date) VALUES ($1, $2, $3);", [message, user_id, date]);
+  } catch {
+    throw error("Unable to post message.");
+  }
+}
+
 module.exports = {
   getUserFromUsername,
   getUserFromId,
-  addUser
+  addUser,
+  getMessages,
+  deleteMessage,
+  postMessage
 }
