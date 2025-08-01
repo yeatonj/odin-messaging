@@ -6,7 +6,6 @@ async function indexGet(req, res) {
     if (req.user) {
         messages = await getMessages();
     }
-    console.log(messages);
     res.render("index", {
         title: "Main Page",
         user: req.user,

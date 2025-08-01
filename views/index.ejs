@@ -12,8 +12,10 @@
     <% for (let i = 0; i < messages.length; i++) { %>
         <h3>Message <%= i+1 %> </h3>
         <p> <%= messages[i].message %> </p>
-        <p>User: <%= messages[i].username %> </p>
-        <p>Date: <%= messages[i].date %></p>
+        <% if (locals.user.ismember) {%>
+            <p>User: <%= messages[i].username %> </p>
+            <p>Date: <%= messages[i].date %></p>
+        <%}%>
     <%}%>
     <a href="/newpost">New Post</a>
     <a href="/permissions">Adjust Permissions</a>
