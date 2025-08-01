@@ -1,0 +1,25 @@
+<!-- views/newPost.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+</head>
+<body>
+  <h1><%= title %></h1>
+  <% if (locals.user) {%>
+    <h1>Hello <%= user.username %></h1>
+    <h3>New Post Details:</h3>
+    <form action="newpost" method="post">
+        <label for="post">Post Text: </label>
+        <input type="text" name="post" id="post">
+        <button type="submit">Post</button>
+    </form>
+    <a href="/logout">LOG OUT</a>
+  <% } else { %>
+    <h1>please log in or create an account before posting</h1>
+    <a href="/login">Login</a>
+    <a href="/signup">Sign Up</a>
+  <%}%>
+  
+</body>
+</html>
