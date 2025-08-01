@@ -43,11 +43,29 @@ async function postMessage(message, user_id, date) {
   }
 }
 
+async function setAdmin(setting, id) {
+  try {
+    await pool.query("UPDATE users SET isadmin=$1 WHERE id=$2;", [setting, id]);
+  } catch {
+    throw error("Unable to adjust admin.");
+  }
+}
+
+async function setMember(setting, id) {
+  try {
+    await pool.query("UPDATE users SET ismember=$1 WHERE id=$2;", [setting, id]);
+  } catch {
+    throw error("Unable to adjust member.");
+  }
+}
+
 module.exports = {
   getUserFromUsername,
   getUserFromId,
   addUser,
   getMessages,
   deleteMessage,
-  postMessage
+  postMessage,
+  setAdmin,
+  setMember
 }

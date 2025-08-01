@@ -11,6 +11,7 @@ const indexRouter = require("./routes/indexRouter");
 const loginRouter = require("./routes/loginRouter");
 const signupRouter = require("./routes/signupRouter");
 const newPostRouter = require("./routes/newPostRouter");
+const permissionsRouter = require("./routes/permissionsRouter");
 
 
 // Set up ejs
@@ -46,6 +47,7 @@ app.get("/logout", (req, res, next) => {
 });
 app.use("/signup", signupRouter);
 app.use("/newpost", newPostRouter);
+app.use("/permissions", permissionsRouter);
 app.use("/", indexRouter);
 
 

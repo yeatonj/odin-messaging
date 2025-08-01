@@ -1,0 +1,29 @@
+<!-- views/permissions.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+</head>
+<body>
+  <h1><%= title %></h1>
+  <% if (locals.user) {%>
+    <h1>Hello <%= user.username %></h1>
+    <h3>Permission Adjustment Passwords:</h3>
+    <form action="permissions" method="post">
+        <label for="admin">Admin Passcode: </label>
+        <input type="password" name="admin" id="admin">
+
+        <label for="member">Member Passcode: </label>
+        <input type="password" name="member" id="member">
+
+        <button type="submit">Submit Passcodes</button>
+    </form>
+    <a href="/logout">LOG OUT</a>
+  <% } else { %>
+    <h1>please log in or create an account before adjusting permissions</h1>
+    <a href="/login">Login</a>
+    <a href="/signup">Sign Up</a>
+  <%}%>
+  
+</body>
+</html>
