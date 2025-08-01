@@ -8,6 +8,13 @@
   <h1><%= title %></h1>
   <% if (locals.user) {%>
     <h1>WELCOME BACK <%= user.username %></h1>
+    <h2>Messages:</h2>
+    <% for (let i = 0; i < messages.length; i++) { %>
+        <h3>Message <%= i+1 %> </h3>
+        <p> <%= messages[i].message %> </p>
+        <p>User: <%= messages[i].user_id %> </p>
+        <p>Date: <%= messages[i].date %></p>
+    <%}%>
     <a href="/logout">LOG OUT</a>
   <% } else { %>
     <h1>please log in or create an account</h1>
