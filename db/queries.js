@@ -23,13 +23,13 @@ async function addUser(username, password, first, last, memberPhrase, adminPhras
 }
 
 async function getMessages() {
-  const { rows } = await pool.query("SELECT message, username, date FROM messages LEFT JOIN users ON user_id=users.id;");
+  const { rows } = await pool.query("SELECT messages.id, message, username, date FROM messages LEFT JOIN users ON user_id=users.id;");
   return rows;
 }
 
 async function deleteMessage(id) {
   try {
-    await pool.query("DELETE FROM messages WHERE user_id=$1;", [id]);
+    await pool.query("DELETE FROM messages WHERE id=$1;", [id]);
   } catch {
     throw error("Unable to delete message");
   }
