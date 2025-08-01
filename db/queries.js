@@ -23,7 +23,7 @@ async function addUser(username, password, first, last, memberPhrase, adminPhras
 }
 
 async function getMessages() {
-  const { rows } = await pool.query("SELECT * FROM messages;");
+  const { rows } = await pool.query("SELECT message, username, date FROM messages LEFT JOIN users ON user_id=users.id;");
   return rows;
 }
 
