@@ -3,7 +3,8 @@ const { addUser } = require('../db/queries');
 
 async function signupGet(req, res) {
     res.render("signup", {
-        title: "Signup Page"
+        title: "Signup Page",
+        message: undefined
     });
 }
 
